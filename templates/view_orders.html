@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+    <h1>Orders</h1>
+    <p><a href="{{ url_for('place_order') }}">Place New Order</a></p>
+    {% if orders %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Total Amount</th>
+                    <th>Status</th>
+                    <th>Order Date</th>
+                    <th>Items</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.order_id }}</td>
+                    <td>{{ order.customer_name }}</td>
+                    <td>${{ order.total_amount:.2f }}</td>
+                    <td>{{ order.order_status }}</td>
+                    <td>{{ order.order_date }}</td>
+                    <td>
+                        {% if order.items %}
+                            <ul>
+                                {% for item in order.items %}
+                                    <li>{{ item.quantity }} x {{ item.product_name }} (${{ item.unit_price:.2f }})</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            No items
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No orders found.</p>
+    {% endif %}
+{% endblock %}

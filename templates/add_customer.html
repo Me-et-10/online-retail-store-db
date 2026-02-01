@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Add Customer{% endblock %}
+{% block content %}
+    <h1>Add New Customer</h1>
+    <form method="POST">
+        {{ form.csrf_token }}
+        <p>
+            {{ form.first_name.label }}<br>
+            {{ form.first_name(size=30) }}
+            {% if form.first_name.errors %}
+                <ul class="errors">
+                    {% for error in form.first_name.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+        <p>
+            {{ form.last_name.label }}<br>
+            {{ form.last_name(size=30) }}
+            {% if form.last_name.errors %}
+                <ul class="errors">
+                    {% for error in form.last_name.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=30) }}
+            {% if form.email.errors %}
+                <ul class="errors">
+                    {% for error in form.email.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+        <p>
+            {{ form.phone_number.label }}<br>
+            {{ form.phone_number(size=30) }}
+        </p>
+        <p>
+            {{ form.address.label }}<br>
+            {{ form.address(size=30) }}
+        </p>
+        <p>
+            {{ form.city.label }}<br>
+            {{ form.city(size=30) }}
+        </p>
+        <p>
+            {{ form.state.label }}<br>
+            {{ form.state(size=30) }}
+        </p>
+        <p>
+            {{ form.zip_code.label }}<br>
+            {{ form.zip_code(size=30) }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}

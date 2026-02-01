@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Place Order{% endblock %}
+{% block content %}
+    <h1>Place New Order</h1>
+    <form method="POST">
+        {{ form.csrf_token }}
+        <p>
+            {{ form.customer_id.label }}<br>
+            {{ form.customer_id() }}
+            {% if form.customer_id.errors %}
+                <ul class="errors">
+                    {% for error in form.customer_id.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+        <p>
+            {{ form.product_id.label }}<br>
+            {{ form.product_id() }}
+            {% if form.product_id.errors %}
+                <ul class="errors">
+                    {% for error in form.product_id.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+        <p>
+            {{ form.quantity.label }}<br>
+            {{ form.quantity(size=5) }}
+            {% if form.quantity.errors %}
+                <ul class="errors">
+                    {% for error in form.quantity.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
